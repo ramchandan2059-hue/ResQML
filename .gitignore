@@ -1,0 +1,28 @@
+# Local Python environments and generated files
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# Local secrets
+.env
+.env.*
+!.env.example
+
+# Local database and SQLite journal files
+database/*.db
+database/*.db-*
+database/*.sqlite
+database/*.sqlite3
+
+# Generated reports and user-uploaded files may contain sensitive information
+reports/
+uploads/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/

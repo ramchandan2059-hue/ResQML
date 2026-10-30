@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediGuard — AI Medicine Safety Checker</title>
+  <meta name="description" content="Check if your medicines are safe together. AI-powered interaction checker with plain-language answers in English, Hindi and Punjabi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css?v=3.5">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💊</text></svg>">
+</head>
+<body data-page="home">
+
+<!-- ================= FLOATING GLASS MEDICINE BACKGROUND ================= -->
+<div id="floatingMedBg" class="floating-med-bg" aria-hidden="true" data-page="home">
+  <!-- 1. Bicolor Capsule (Cyan / Frosted White) - Top Left -->
+  <div class="floating-med-item med-capsule med-pos-1">
+    <div class="capsule-body">
+      <div class="capsule-half half-left tint-cyan"></div>
+      <div class="capsule-ring"></div>
+      <div class="capsule-half half-right tint-white"></div>
+      <div class="med-sheen"></div>
+    </div>
+  </div>
+
+  <!-- 2. Scored Round Tablet (Silver 500mg) - Top Right -->
+  <div class="floating-med-item med-tablet med-pos-2">
+    <div class="tablet-body">
+      <div class="tablet-score"></div>
+      <div class="tablet-imprint">500</div>
+      <div class="med-sheen-round"></div>
+    </div>
+  </div>
+
+  <!-- 3. Bicolor Capsule (Indigo / Frosted White) - Mid Left -->
+  <div class="floating-med-item med-capsule med-pos-3">
+    <div class="capsule-body">
+      <div class="capsule-half half-left tint-indigo"></div>
+      <div class="capsule-ring"></div>
+      <div class="capsule-half half-right tint-white"></div>
+      <div class="med-sheen"></div>
+    </div>
+  </div>
+
+  <!-- 4. Translucent Amber Softgel - Mid Right -->
+  <div class="floating-med-item med-softgel med-pos-4">
+    <div class="softgel-body">
+      <div class="softgel-core"></div>
+      <div class="med-sheen-softgel"></div>
+    </div>
+  </div>
+
+  <!-- 5. Oblong Caplet (Pearl Scored) - Bottom Left -->
+  <div class="floating-med-item med-caplet med-pos-5">
+    <div class="caplet-body">
+      <div class="caplet-score"></div>
+      <div class="med-sheen"></div>
+    </div>
+  </div>
+
+  <!-- 6. Bicolor Capsule (Coral / Pearl) - Bottom Right -->
+  <div class="floating-med-item med-capsule med-pos-6">
+    <div class="capsule-body">
+      <div class="capsule-half half-left tint-coral"></div>
+      <div class="capsule-ring"></div>
+      <div class="capsule-half half-right tint-white"></div>
+      <div class="med-sheen"></div>
+    </div>
+  </div>
+
+  <!-- 7. Scored Round Tablet (Teal / 250mg) - Mid-Top Center -->
+  <div class="floating-med-item med-tablet med-pos-7">
+    <div class="tablet-body tint-teal">
+      <div class="tablet-score"></div>
+      <div class="tablet-imprint">250</div>
+      <div class="med-sheen-round"></div>
+    </div>
+  </div>
+
+  <!-- 8. Golden Mini Softgel - Mid-Bottom Center -->
+  <div class="floating-med-item med-softgel med-pos-8">
+    <div class="softgel-body">
+      <div class="softgel-core"></div>
+      <div class="med-sheen-softgel"></div>
+    </div>
+  </div>
+
+  <!-- 9. Oblong Caplet (Sky Tint) - Upper Right -->
+  <div class="floating-med-item med-caplet med-pos-9">
+    <div class="caplet-body tint-sky">
+      <div class="caplet-score"></div>
+      <div class="med-sheen"></div>
+    </div>
+  </div>
+
+  <!-- 10. Bicolor Capsule (Emerald / Frosted White) - Lower Left -->
+  <div class="floating-med-item med-capsule med-pos-10">
+    <div class="capsule-body">
+      <div class="capsule-half half-left tint-emerald"></div>
+      <div class="capsule-ring"></div>
+      <div class="capsule-half half-right tint-white"></div>
+      <div class="med-sheen"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= NAVBAR ================= -->
+<header class="nav">
+  <div class="nav-in">
+    <a href="#/" class="brand"><span class="logo">💊</span><b>MediGuard</b></a>
+    <nav class="links" id="navLinks">
+      <a href="#/" data-route="home">Home</a>
+      <a href="#/check" data-route="check">Check medicines</a>
+      <a href="#/samples" data-route="samples">Sample cases</a>
+    </nav>
+    <div class="nav-right">
+      <button id="openSettingsBtn" class="round" title="AI settings">⚙</button>
+      <a href="#/check" class="btn btn-primary nav-cta">Start a check</a>
+      <button id="burger" class="round burger" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="app">
+
+<!-- ================= HOME ================= -->
+<section class="page" data-page="home">
+  <div class="hero">
+    <div class="hero-text">
+      <span class="eyebrow">✦ AI medicine safety assistant</span>
+      <h1>Know if your medicines are <em>safe together.</em></h1>
+      <p>Add the medicines you or your family take. MediGuard checks for risky combinations and explains the result in simple words — in English, हिंदी or ਪੰਜਾਬੀ.</p>
+      <div class="hero-cta">
+        <a href="#/check" class="btn btn-light btn-lg">Check my medicines →</a>
+        <a href="#/samples" class="btn btn-ghost-light btn-lg">Try a sample case</a>
+      </div>
+      <div class="hero-note">🔒 Educational tool · No sign-up · Not a diagnosis</div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="float-card fc1"><span class="dot r"></span><div><b>Warfarin + Aspirin</b><small>Serious — risk of bleeding</small></div></div>
+      <div class="float-card fc2"><span class="dot r"></span><div><b>Lisinopril + Losartan</b><small>Serious — kidney strain</small></div></div>
+      <div class="float-card fc3"><span class="dot g"></span><div><b>Metformin</b><small>No problems found</small></div></div>
+      <div class="phone">
+        <div class="ph-head">💊 Safety result</div>
+        <div class="ph-verdict">🔴 <b>Talk to a doctor soon</b></div>
+        <div class="ph-bar"><i></i></div>
+        <div class="ph-row"><span>6 medicines</span><span>3 serious</span></div>
+        <div class="ph-line"></div><div class="ph-line s"></div><div class="ph-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b id="statInteractions">160,000+</b><span>drug interactions in database</span></div>
+      <div class="stat"><b>3</b><span>languages: EN · हिंदी · ਪੰਜਾਬੀ</span></div>
+      <div class="stat"><b>📷</b><span>scan a box or prescription</span></div>
+      <div class="stat"><b>📄</b><span>downloadable PDF report</span></div>
+    </div>
+
+    <div class="section-head">
+      <span class="eyebrow dark">What you can do</span>
+      <h2>Everything you need, nothing you don't</h2>
+    </div>
+    <div class="cards4">
+      <article class="fcard"><div class="ficon">🔍</div><h3>Interaction check</h3><p>Finds dangerous pairs, repeated medicine types and extra risks for older patients.</p></article>
+      <article class="fcard"><div class="ficon">📷</div><h3>Scan the box</h3><p>Take a photo of a strip, box or prescription. AI reads the name — you confirm it.</p></article>
+      <article class="fcard"><div class="ficon">🗣</div><h3>Plain language</h3><p>Clear explanations, warning signs and questions to ask — in your own language.</p></article>
+      <article class="fcard"><div class="ficon">📄</div><h3>Doctor-ready report</h3><p>Download a PDF summary to show your doctor or pharmacist.</p></article>
+    </div>
+
+    <div class="section-head">
+      <span class="eyebrow dark">Simple by design</span>
+      <h2>Three steps. About a minute.</h2>
+    </div>
+    <div class="steps3">
+      <div class="step"><span class="num">1</span><h3>Tell us about the patient</h3><p>Age, sex and health conditions — all optional.</p></div>
+      <div class="step"><span class="num">2</span><h3>Add the medicines</h3><p>Type the names or scan the packaging.</p></div>
+      <div class="step"><span class="num">3</span><h3>Get a clear answer</h3><p>A traffic-light verdict, what it means, and what to ask your doctor.</p></div>
+    </div>
+
+    <div class="split">
+      <div>
+        <span class="eyebrow dark">Why it matters</span>
+        <h2>More medicines, more chances of interaction</h2>
+        <p>When someone takes five or more medicines at once, it's called <b>polypharmacy</b>. It's common in older adults with several health conditions — and every extra medicine is another chance that two of them clash.</p>
+        <p>Many of these problems are easy to prevent once a doctor or pharmacist knows about them. MediGuard helps you spot them early so you know what to ask.</p>
+      </div>
+      <div class="callout">
+        <h3>What MediGuard looks for</h3>
+        <ul>
+          <li>🔴 <b>Serious</b> pairs that can cause bleeding, kidney or heart problems</li>
+          <li>🟡 <b>Moderate</b> combinations that need monitoring</li>
+          <li>🔄 Two medicines of the <b>same type</b> taken together</li>
+          <li>👵 Extra care points for <b>older patients</b></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cta-band">
+      <div><h2>Ready to check your medicines?</h2><p>Free, private and takes about a minute.</p></div>
+      <a href="#/check" class="btn btn-light btn-lg">Start a check →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CHECKER ================= -->
+<section class="page" data-page="check">
+  <div class="wrap narrow">
+    <div class="page-title">
+      <h1>Medicine safety check</h1>
+      <p>Answer a few quick questions and I'll check your medicines.</p>
+    </div>
+
+    <ol class="stepper" id="stepper">
+      <li data-step="1" class="active"><span>1</span> Patient</li>
+      <li data-step="2"><span>2</span> Medicines</li>
+      <li data-step="3"><span>3</span> Results</li>
+    </ol>
+
+    <!-- STEP 1 -->
+    <div class="panel step-pane" id="step1">
+      <h2>Who is this check for?</h2>
+      <p class="muted">This helps me tailor the advice. Every field is optional — skip if you prefer.</p>
+      <div class="form-grid">
+        <label>Age<input type="number" id="patientAge" min="1" max="120" placeholder="e.g. 70"></label>
+        <label>Sex
+          <select id="patientSex"><option value="Male">Male</option><option value="Female">Female</option><option value="Other">Other</option></select>
+        </label>
+        <label class="full">Health conditions
+          <input type="text" id="patientConditions" placeholder="e.g. High blood pressure, Diabetes">
+        </label>
+        <label>For how long?<input type="text" id="patientDuration" placeholder="e.g. 5 years"></label>
+        <label>Other notes<input type="text" id="patientFrailty" placeholder="e.g. weak, kidney problem"></label>
+      </div>
+      <div class="actions-row">
+        <button class="btn btn-quiet" id="skipStep1">Skip</button>
+        <button class="btn btn-primary" id="toStep2">Continue →</button>
+      </div>
+      <div class="hint">💡 Don't enter names, phone numbers or ID numbers.</div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="panel step-pane hidden" id="step2">
+      <div class="panel-top">
+        <div><h2>What medicines are being taken?</h2><p class="muted">Add at least two to check for interactions.</p></div>
+        <button id="openPhotoUploadBtn" class="btn btn-soft">📷 Scan box / prescription</button>
+      </div>
+
+      <div class="add-row">
+        <div class="input-wrap">
+          <input type="text" id="medSearchInput" placeholder="Start typing a medicine, e.g. Warfarin…" autocomplete="off">
+          <div id="autocompleteDropdown" class="autocomplete"></div>
+        </div>
+        <input type="text" id="medDoseInput" class="dose" placeholder="Dose (optional)">
+        <button class="btn btn-primary" id="addMedBtn">Add</button>
+      </div>
+
+      <div id="medList" class="med-list"></div>
+
+      <div class="actions-row">
+        <button class="btn btn-quiet" id="backStep1">← Back</button>
+        <button class="btn btn-primary btn-lg" id="checkBtn" disabled>✨ Check safety</button>
+      </div>
+      <div class="hint">Or <a href="#/samples">try a sample case</a> to see how it works.</div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-pane hidden" id="step3">
+      <div id="resultsLoading" class="panel loading hidden">
+        <div class="spinner"></div>
+        <h2 id="loadTitle">Checking your medicines…</h2>
+        <p class="muted" id="loadSub">Looking up interactions</p>
+      </div>
+
+      <div id="resultsBody" class="hidden">
+        <div id="verdict" class="verdict"></div>
+
+        <div class="result-bar">
+          <div class="chips" id="resultChips"></div>
+          <div class="result-actions">
+            <button class="btn btn-soft" id="editMedsBtn">✏️ Edit medicines</button>
+            <button class="btn btn-green" id="pdfBtn">📄 Download report</button>
+          </div>
+        </div>
+
+        <div class="tabs" id="resultTabs">
+          <button class="tab active" data-tab="overview">Overview</button>
+          <button class="tab" data-tab="interactions">Interactions</button>
+          <button class="tab" data-tab="map">Interaction map</button>
+        </div>
+
+        <div class="tab-pane" id="tab-overview">
+          <div class="panel">
+            <div class="panel-top">
+              <h2>In simple words</h2>
+              <div class="lang">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="hi">हिंदी</button>
+                <button class="lang-btn" data-lang="pa">ਪੰਜਾਬੀ</button>
+              </div>
+            </div>
+            <div id="aiExplanationContent"></div>
+          </div>
+          <div id="notesPanel"></div>
+        </div>
+
+        <div class="tab-pane hidden" id="tab-interactions"><div id="findingsList"></div></div>
+
+        <div class="tab-pane hidden" id="tab-map">
+          <div class="panel">
+            <div class="legend"><span><i class="dr"></i>Serious</span><span><i class="da"></i>Be careful</span><span><i class="db"></i>Minor</span></div>
+            <div id="networkGraph" class="map-box"><svg id="graphSvg" viewBox="0 0 560 340" preserveAspectRatio="xMidYMid meet"></svg></div>
+            <p class="muted center">Lines show which medicines interact. Thicker, red lines are more serious.</p>
+          </div>
+        </div>
+
+        <div class="again">
+          <button class="btn btn-quiet" id="newCheckBtn">🔄 Start a new check</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="disclaimer">⚕ Educational decision support only. This is not a diagnosis. Never start, stop or change a medicine without asking your doctor or pharmacist.</div>
+  </div>
+</section>
+
+<!-- ================= SAMPLES ================= -->
+<section class="page" data-page="samples">
+  <div class="wrap">
+    <div class="page-title center">
+      <h1>Sample cases</h1>
+      <p>See MediGuard in action with ready-made example patients. These cases are synthetic, not real people.</p>
+    </div>
+    <div class="cards3" id="sampleCards">
+      <article class="scard"><div class="sc-top"><b>Case 1</b><span class="risk r">High risk</span></div><h3>70-year-old man</h3><p class="muted">Hypertension, Type 2 diabetes</p><div class="sc-meds" data-meds="1"></div><button class="btn btn-primary block" data-sample="1">Run this case →</button></article>
+      <article class="scard"><div class="sc-top"><b>Case 2</b><span class="risk a">Moderate risk</span></div><h3>68-year-old woman</h3><p class="muted">Several long-term conditions</p><div class="sc-meds" data-meds="2"></div><button class="btn btn-primary block" data-sample="2">Run this case →</button></article>
+      <article class="scard"><div class="sc-top"><b>Case 3</b><span class="risk g">Low risk</span></div><h3>52-year-old man</h3><p class="muted">Few medicines, lower risk</p><div class="sc-meds" data-meds="3"></div><button class="btn btn-primary block" data-sample="3">Run this case →</button></article>
+    </div>
+    <div class="center" style="margin-top:2rem"><span class="muted">Want to check your own list?</span> <a href="#/check" class="link-arrow">Start a check →</a></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+  <div class="foot-in">
+    <div>
+      <a href="#/" class="brand light"><span class="logo">💊</span><b>MediGuard</b></a>
+      <p>AI medicine safety assistant — a clinical decision-support prototype for education.</p>
+      <span id="systemStatusBadge" class="status">● Online</span>
+    </div>
+    <div><h4>Explore</h4><a href="#/check">Check medicines</a><a href="#/samples">Sample cases</a></div>
+    <div><h4>Good to know</h4><span>Not a diagnosis</span><span>Data: DDInter database</span><span>AI: Groq LLaMA-3.3-70B</span><a href="#" id="footSettings">AI settings</a></div>
+  </div>
+  <div class="foot-bottom">⚕ Educational decision support · Non-diagnostic · Always consult a doctor or pharmacist</div>
+</footer>
+
+<!-- ================= MODALS ================= -->
+<div id="photoModal" class="modal-backdrop">
+  <div class="modal wide">
+    <div class="modal-head"><h3>📷 Scan medicine box or prescription</h3><button id="closePhotoModal" class="close-btn">&times;</button></div>
+    <p class="muted">Take or upload a clear photo. I'll read the medicine names — you confirm before they're added.</p>
+    <div class="tabs small">
+      <button type="button" id="tabUploadMode" class="tab active">📁 Upload photo</button>
+      <button type="button" id="tabCameraMode" class="tab">📸 Use camera</button>
+    </div>
+    <div id="uploadSection"><input type="file" id="photoFileInput" accept="image/*" multiple></div>
+    <div id="cameraSection" class="hidden">
+      <video id="webcamVideo" autoplay playsinline></video>
+      <canvas id="webcamCanvas" class="hidden"></canvas>
+      <div class="cam-row">
+        <button type="button" id="startCameraBtn" class="btn btn-soft">▶ Start</button>
+        <button type="button" id="snapPhotoBtn" class="btn btn-primary" disabled>📸 Snap</button>
+        <button type="button" id="stopCameraBtn" class="btn btn-soft" disabled>⏹ Stop</button>
+      </div>
+    </div>
+    <div id="photoPreviewContainer" class="preview hidden"></div>
+    <button id="scanPhotoBtn" class="btn btn-primary block hidden">⚡ Read medicines from photo</button>
+    <div id="visionResultsContainer" class="hidden">
+      <h4>Is this correct? Edit if needed:</h4>
+      <div id="visionCandidatesList"></div>
+      <button id="confirmAddDetectedBtn" class="btn btn-primary block hidden">✓ Add these medicines</button>
+    </div>
+  </div>
+</div>
+
+<div id="settingsModal" class="modal-backdrop">
+  <div class="modal">
+    <div class="modal-head"><h3>⚙ AI settings</h3><button id="closeSettingsModal" class="close-btn">&times;</button></div>
+    <label class="lbl">Groq API key (gsk_…)<input type="password" id="groqApiKeyInput" placeholder="Paste your Groq API key"></label>
+    <p class="muted">Free key from <a href="https://console.groq.com" target="_blank">console.groq.com</a>. Without it, built-in clinical rules write the explanations.</p>
+    <button id="saveGroqKeyBtn" class="btn btn-primary block">Save key</button>
+  </div>
+</div>
+
+<script src="/static/js/app.js?v=3.6"></script>
+</body>
+</html>
